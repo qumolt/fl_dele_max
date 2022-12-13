@@ -19,7 +19,8 @@ void *fl_dele_new(t_symbol *s, short argc, t_atom *argv)
 	t_fl_dele *x = (t_fl_dele *)object_alloc(fl_dele_class);
 
 	inlet_new((t_object *)x, "list");
-	x->m_outlet = intout((t_object *)x);
+	x->m_outlet2 = intout((t_object *)x);
+	x->m_outlet1 = floatout((t_object *)x);
 
 	x->list_len = 0;
 
@@ -34,14 +35,15 @@ void fl_dele_assist(t_fl_dele *x, void *b, long msg, long arg, char *dst)
 {
 	if (msg == ASSIST_INLET) {										
 		switch (arg) {
-		case I_INPUT: sprintf(dst, "index"); break;
-		case I_LIST: sprintf(dst, "list"); break;
+		case I_INPUT: sprintf(dst, "(float) evaluated number"); break;
+		case I_LIST: sprintf(dst, "(list) starting interval numbers"); break;
 		}
 
 	}
 	else if (msg == ASSIST_OUTLET) {    
 		switch (arg) {
-		case O_OUTPUT: sprintf(dst, "extrapolated term"); break;
+		case O_OUTPUT: sprintf(dst, "pass value"); break;
+		case O_INDEX: sprintf(dst, "index"); break;
 		}
 	}
 }
@@ -63,7 +65,8 @@ void fl_dele_float(t_fl_dele *x, double f)
 		}
 	}
 
-	outlet_int(x->m_outlet, index);
+	outlet_int(x->m_outlet2, index);
+	outlet_float(x->m_outlet1, val);
 }
 
 void fl_dele_int(t_fl_dele *x, long n) 

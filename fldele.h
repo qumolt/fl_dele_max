@@ -6,7 +6,7 @@
 #define MAX_LEN_LIST 256
 
 enum INLETS { I_INPUT, I_LIST, NUM_INLETS };
-enum OUTLETS { O_OUTPUT, NUM_OUTLETS };
+enum OUTLETS { O_OUTPUT, O_INDEX, NUM_OUTLETS };
 
 typedef struct {
 
@@ -16,7 +16,8 @@ typedef struct {
 	float list[MAX_LEN_LIST];
 	long list_len;
 
-	void *m_outlet;
+	void *m_outlet1;
+	void *m_outlet2;
 
 } t_fl_dele;
 
