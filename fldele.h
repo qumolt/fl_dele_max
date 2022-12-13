@@ -12,9 +12,9 @@ typedef struct {
 
 	t_object obj;
 	
-	long mod_value;
-	float list[MAX_LEN_LIST];
+	float *list;
 	long list_len;
+	long max_len;
 
 	void *m_outlet1;
 	void *m_outlet2;
@@ -27,6 +27,9 @@ void fl_dele_assist(t_fl_dele *x, void *b, long msg, long arg, char *dst);
 void fl_dele_int(t_fl_dele *x, long n);
 void fl_dele_float(t_fl_dele *x, double f);
 void fl_dele_list(t_fl_dele *x, t_symbol *s, long argc, t_atom *argv);
+
+void fl_dele_list_len(t_fl_dele *x, t_symbol *s, long argc, t_atom *argv);
+void fl_dele_free(t_fl_dele *x);
 
 void swap(float *px, float *py);
 
